@@ -137,6 +137,7 @@ MIDDLEWARE = [
     "django.middleware.locale.LocaleMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
+    "sites_conformes.core.middleware.IframeMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
 ]
@@ -187,6 +188,7 @@ TEMPLATES = [
                 "wagtailmenus.context_processors.wagtailmenus",
                 "sites_conformes.core.context_processors.skiplinks",
                 "sites_conformes.core.context_processors.mega_menus",
+                "sites_conformes.core.context_processors.iframe",
             ],
         },
     },
@@ -464,11 +466,11 @@ OIDC_RP_SIGN_ALGO = os.getenv("PROCONNECT_SIGN_ALGO", "RS256")
 OIDC_STORE_ID_TOKEN = True
 PROCONNECT_DOMAIN = os.getenv("PROCONNECT_DOMAIN", "fca.integ01.dev-agentconnect.fr")
 PROCONNECT_API_ROOT = os.getenv("PROCONNECT_API_ROOT", f"https://{PROCONNECT_DOMAIN}/api/v2")
-OIDC_OP_JWKS_ENDPOINT = f"{PROCONNECT_API_ROOT}/jwks"
-OIDC_OP_AUTHORIZATION_ENDPOINT = f"{PROCONNECT_API_ROOT}/authorize"
-OIDC_OP_TOKEN_ENDPOINT = f"{PROCONNECT_API_ROOT}/token"
-OIDC_OP_USER_ENDPOINT = f"{PROCONNECT_API_ROOT}/userinfo"
-OIDC_OP_LOGOUT_ENDPOINT = f"{PROCONNECT_API_ROOT}/session/end"
+OIDC_OP_JWKS_ENDPOINT = os.getenv("OIDC_OP_JWKS_ENDPOINT", f"{PROCONNECT_API_ROOT}/jwks")
+OIDC_OP_AUTHORIZATION_ENDPOINT = os.getenv("OIDC_OP_AUTHORIZATION_ENDPOINT", f"{PROCONNECT_API_ROOT}/authorize")
+OIDC_OP_TOKEN_ENDPOINT = os.getenv("OIDC_OP_TOKEN_ENDPOINT", f"{PROCONNECT_API_ROOT}/token")
+OIDC_OP_USER_ENDPOINT = os.getenv("OIDC_OP_USER_ENDPOINT", f"{PROCONNECT_API_ROOT}/userinfo")
+OIDC_OP_LOGOUT_ENDPOINT = os.getenv("OIDC_OP_LOGOUT_ENDPOINT", f"{PROCONNECT_API_ROOT}/session/end")
 USER_OIDC_ESSENTIAL_CLAIMS = ["email"]
 OIDC_AUTH_REQUEST_EXTRA_PARAMS = {"acr_values": "eidas1"}
 OIDC_REDIRECT_ALLOWED_HOSTS = ALLOWED_HOSTS
