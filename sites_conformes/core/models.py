@@ -487,6 +487,15 @@ class CmsDsfrConfig(ClusterableModel, BaseSiteSetting):
     theme_modale_button = models.BooleanField(_("Display theme modale button"), default=False)  # type: ignore
     mourning = models.BooleanField(_("Mourning"), default=False)  # type: ignore
 
+    iframe_allow_origins = models.TextField(
+        _("Allowed iframe origins"),
+        default="",
+        blank=True,
+        help_text=_(
+            "One domain per line (e.g. 'example.com'). Pages can be embedded in an iframe from these domains."
+        ),
+    )
+
     newsletter_description = models.TextField(_("Newsletter description"), default="", blank=True)
 
     newsletter_url = models.URLField(
@@ -577,6 +586,7 @@ class CmsDsfrConfig(ClusterableModel, BaseSiteSetting):
                 FieldPanel("beta_tag"),
                 FieldPanel("theme_modale_button"),
                 FieldPanel("header_login_button"),
+                FieldPanel("iframe_allow_origins"),
             ],
             heading=_("Advanced settings"),
         ),
