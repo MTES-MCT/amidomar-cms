@@ -11,7 +11,7 @@ Ce guide explique comment ajouter `sites-conformes` à un projet Django existant
 
 ## Installation via uv
 
-```bash
+```sh
 uv add sites-conformes
 ```
 
@@ -21,9 +21,9 @@ uv add sites-conformes
 
 Ajoutez la configuration suivante à votre `config/settings.py`.
 
-### Lecture des variables d'environnement
+### Lecture des variables d’environnement
 
-Plusieurs réglages du package sont pilotés par des variables d'environnement.
+Plusieurs réglages du package sont pilotés par des variables d’environnement.
 Définissez un petit helper en haut de votre `settings.py` :
 
 ```python
@@ -51,7 +51,7 @@ INSTALLED_APPS.extend([
     "dsfr",
     # Le package lui-même (fournit les templates de base partagés)
     "sites_conformes",
-    # Les apps qu'il contient
+    # Les apps qu’il contient
     "sites_conformes.core",
     "sites_conformes.blog",
     "sites_conformes.events",
@@ -62,7 +62,6 @@ INSTALLED_APPS.extend([
     "wagtail.contrib.settings",
     "wagtail.contrib.typed_table_block",
     "wagtail.contrib.routable_page",
-    "wagtail_modeladmin",
     "wagtailmenus",
     "wagtailmarkdown",
     "wagtail_honeypot",
@@ -116,7 +115,7 @@ uniquement aux templates au niveau du package.)
 ### Réglages divers
 
 ```python
-# Chemin d'accès à l'admin Wagtail. Par défaut côté package : "cms-admin/".
+# Chemin d’accès à l’admin Wagtail. Par défaut côté package : "cms-admin/".
 WAGTAILADMIN_PATH = os.getenv("WAGTAILADMIN_PATH", "cms-admin/")
 
 # Hôte et protocole utilisés pour générer les URL absolues.
@@ -130,7 +129,7 @@ Voir {doc}`configuration` pour la liste complète des réglages disponibles.
 
 ## Migrations et collecte des fichiers statiques
 
-```bash
+```sh
 python manage.py migrate
 python manage.py collectstatic
 ```
